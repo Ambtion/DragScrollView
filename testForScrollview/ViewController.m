@@ -7,13 +7,14 @@
 //
 
 #import "ViewController.h"
-#import "MCDragView.h"
+#import "MCDragTableView.h"
+
 #import "TestTableView.h"
 
-@interface ViewController ()<MCDragViewLayoutDelegate,UITableViewDataSource>
+@interface ViewController ()<MCDragViewLayoutDelegate,MCDragTableViewDataSource>
 
 @property(nonatomic,strong)UIView * headView;
-@property(nonatomic,strong)MCDragView * dragView;
+@property(nonatomic,strong)MCDragTableView * dragView;
 @end
 
 @implementation ViewController
@@ -24,26 +25,17 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.dragView = [[MCDragView alloc] initWithFrame:CGRectMake(0,
+    self.dragView = [[MCDragTableView alloc] initWithFrame:CGRectMake(0,
                                                                  self.view.bounds.size.height - 200,
                                                                  self.view.bounds.size.width,
                                                                  self.view.bounds.size.height)];
     self.dragView.dragLayoutDelegate = self;
     self.dragView.dataSource = self;
+    self.dragView.delegate = self;
     [self.view addSubview:self.dragView];
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-    [self.view addGestureRecognizer:tap];
-    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, self.dragView.frame.origin.y, self.view.bounds.size.width, 100)];
-    self.headView.backgroundColor = [UIColor redColor];
-    [self.view insertSubview:self.headView belowSubview:self.dragView];
     
 }
 
-- (void)tapGesture:(UITapGestureRecognizer *)tapges{
-    [self.dragView changeToBottomScreen:^(BOOL finished) {
-        
-    }];
-}
 
 - (CGFloat)mcdragViewbottomSpace{
     return 14.f;
@@ -54,30 +46,42 @@
 }
 
 - (void)mcdragViewDragPer:(CGFloat)per{
-    NSLog(@"xxxxx %f",per);
-    CGRect rect = self.headView.frame;
-    rect.origin.y = self.dragView.frame.origin.y - rect.size.height * per;
-    self.headView.frame = rect;
-    self.headView.alpha = per;
+    
 }
 
 #pragma mark - Test
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)numberOfRowsInMCDragTableView:(MCDragTableView *)tableView {
     return 100;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
-    }
+- (CGFloat)mcTableView:(MCDragTableView *)tableView heightForRowAtIndex:(NSInteger)index {
+    return 40;
+}
+
+- (UITableViewCell *)mcTableView:(MCDragTableView *)tableView cellForRowAtIndex:(NSInteger)index {
     
-    cell.textLabel.text = [NSString stringWithFormat:@"index is %ld",indexPath.row];
+    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+  
+    cell.textLabel.text = [NSString stringWithFormat:@"index is %ld",index];
+    cell.backgroundColor = [UIColor redColor];
+    if (index == 2) {
+        cell.backgroundColor = [UIColor greenColor];
+    }
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    NSLog(@"Tap");
+- (BOOL)mcTableView:(MCDragTableView *)tableView rowAtIndexChangeFrame:(NSInteger)index {
+    if (index == 2 || index == 4) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)mcTableView:(MCDragTableView *)tableView didSelectRowAtIndex:(NSInteger)index {
+    NSLog(@"Tap %d",index);
+    NSLog(@"%@",[tableView visibleCells]);
+    UITableViewCell * cell = [tableView cellForRowAtIndex:index];
+    NSLog(@"Tap %d",cell.tag);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

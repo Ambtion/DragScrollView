@@ -16,6 +16,8 @@
 		B85C9A202361889600903F27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B85C9A1F2361889600903F27 /* main.m */; };
 		B85C9A2823618BFD00903F27 /* MCDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = B85C9A2723618BFD00903F27 /* MCDragView.m */; };
 		B85C9A2B23618F4900903F27 /* TestTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B85C9A2A23618F4900903F27 /* TestTableView.m */; };
+		B8EB8CA2237D021300ABDC5A /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EB8CA1237D021300ABDC5A /* UIView+Sizes.m */; };
+		B8EB8CA52383797D00ABDC5A /* MCDragTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EB8CA42383797D00ABDC5A /* MCDragTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,10 @@
 		B85C9A2723618BFD00903F27 /* MCDragView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCDragView.m; sourceTree = "<group>"; };
 		B85C9A2923618F4900903F27 /* TestTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableView.h; sourceTree = "<group>"; };
 		B85C9A2A23618F4900903F27 /* TestTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableView.m; sourceTree = "<group>"; };
+		B8EB8CA0237D021300ABDC5A /* UIView+Sizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Sizes.h"; sourceTree = "<group>"; };
+		B8EB8CA1237D021300ABDC5A /* UIView+Sizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Sizes.m"; sourceTree = "<group>"; };
+		B8EB8CA32383797D00ABDC5A /* MCDragTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCDragTableView.h; sourceTree = "<group>"; };
+		B8EB8CA42383797D00ABDC5A /* MCDragTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCDragTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +81,12 @@
 				B85C9A142361889200903F27 /* ViewController.m */,
 				B85C9A2623618BFD00903F27 /* MCDragView.h */,
 				B85C9A2723618BFD00903F27 /* MCDragView.m */,
+				B8EB8CA32383797D00ABDC5A /* MCDragTableView.h */,
+				B8EB8CA42383797D00ABDC5A /* MCDragTableView.m */,
 				B85C9A2923618F4900903F27 /* TestTableView.h */,
 				B85C9A2A23618F4900903F27 /* TestTableView.m */,
+				B8EB8CA0237D021300ABDC5A /* UIView+Sizes.h */,
+				B8EB8CA1237D021300ABDC5A /* UIView+Sizes.m */,
 				B85C9A162361889200903F27 /* Main.storyboard */,
 				B85C9A192361889600903F27 /* Assets.xcassets */,
 				B85C9A1B2361889600903F27 /* LaunchScreen.storyboard */,
@@ -158,8 +168,10 @@
 			files = (
 				B85C9A152361889200903F27 /* ViewController.m in Sources */,
 				B85C9A0F2361889200903F27 /* AppDelegate.m in Sources */,
+				B8EB8CA2237D021300ABDC5A /* UIView+Sizes.m in Sources */,
 				B85C9A2823618BFD00903F27 /* MCDragView.m in Sources */,
 				B85C9A202361889600903F27 /* main.m in Sources */,
+				B8EB8CA52383797D00ABDC5A /* MCDragTableView.m in Sources */,
 				B85C9A122361889200903F27 /* SceneDelegate.m in Sources */,
 				B85C9A2B23618F4900903F27 /* TestTableView.m in Sources */,
 			);

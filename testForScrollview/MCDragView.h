@@ -39,7 +39,7 @@
 
 @end
 
-@interface MCDragView : UITableView
+@interface MCDragView : UIScrollView
 
 @property(nonatomic,weak)id<MCDragViewLayoutDelegate> dragLayoutDelegate; // 决定布局位置
 
@@ -57,7 +57,8 @@
 - (void)changeToBottomScreen:(void (^)(BOOL finished))completion;
 - (void)changeToFullScreen:(void (^)(BOOL finished))completion;
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+- (CGFloat)changePercentage;
 
 @end
 

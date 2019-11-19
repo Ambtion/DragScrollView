@@ -1,6 +1,6 @@
 
 #import "MCDragView.h"
-
+#import "UIView+Sizes.h"
 
 typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	MCDragDirectionEnum_Up    = 1,
@@ -48,8 +48,8 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	if (self) {
 		
 		self.scrollsToTop  = NO;
-		self.backgroundColor = [UIColor whiteColor];
-		self.separatorStyle = UITableViewCellSeparatorStyleNone;
+		self.backgroundColor = [UIColor redColor];
+//		self.separatorStyle = UITableViewCellSeparatorStyleNone;
 		self.isFirtInit = YES;
 		[self initProxy];
 		[self addObservers];
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	self.delegateProxy = [[MCDragViewProxy alloc] init];
 	self.delegateProxy.middleMan = self;
 	self.delegateProxy.receiver = self;
-	super.delegate = (id)self.delegateProxy;
+    super.delegate = self.delegateProxy;
 }
 
 - (void)setDelegate:(id<UITableViewDelegate>)delegate {
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 #pragma mark - tableView 滑动下滑移动 事件转移
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-	if (scrollView.contentOffset.y < 0 && !self.layer.animationKeys && self.isTracking) {
+	if (scrollView.contentOffset.y < 0 && !scrollView.layer.animationKeys && scrollView.isTracking) {
 		[self moveScrollViewByDistance:-scrollView.contentOffset.y];
 		self.contentOffset = CGPointZero;
 	}
@@ -104,6 +104,7 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	if ([self.delegateProxy.receiver respondsToSelector:@selector(scrollViewDidScroll:)]) {
 		[self.delegateProxy.receiver scrollViewDidScroll:scrollView];
 	}
+    NSLog(@"scrollView");
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
@@ -657,8 +658,8 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	if (self.layer.presentationLayer) {
 		moveSpace = [self bottomRect].origin.y - self.layer.presentationLayer.frame.origin.y;
 	}
-	if (distance > 0 && moveSpace >= 0) {
-		per = moveSpace / distance;
+	if (distance > 0) {
+		per = MAX(moveSpace, 0) / distance;
 	} else {
 		per = -1;
 	}
@@ -709,7 +710,5 @@ typedef NS_ENUM(NSUInteger, MCDragDirectionEnum) {
 	}
 	return [super respondsToSelector:aSelector];
 }
-
-
 
 @end
